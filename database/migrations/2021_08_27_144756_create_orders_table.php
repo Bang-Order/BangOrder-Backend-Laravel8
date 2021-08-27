@@ -16,9 +16,13 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('restaurant_id');
-            $table->foreign('restaurant_id')->references('id')->on('restaurants');
+            $table->foreign('restaurant_id')
+                ->references('id')
+                ->on('restaurants');
             $table->unsignedBigInteger('restaurant_table_id');
-            $table->foreign('restaurant_table_id')->references('id')->on('restaurant_tables');
+            $table->foreign('restaurant_table_id')
+                ->references('id')
+                ->on('restaurant_tables');
             $table->integer('total_price');
             $table->string('payment_status');
             $table->string('order_status');
