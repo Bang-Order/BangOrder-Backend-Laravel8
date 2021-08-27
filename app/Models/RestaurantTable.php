@@ -11,8 +11,6 @@ class RestaurantTable extends Model
 
     protected $guarded = ['id'];
 
-    protected $fillable = ['restaurant_id'];
-
     public function restaurant() {
         return $this->belongsTo(Restaurant::class);
     }
