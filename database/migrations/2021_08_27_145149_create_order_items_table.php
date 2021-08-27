@@ -16,9 +16,14 @@ class CreateOrderItemsTable extends Migration
         Schema::create('order_items', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('order_id');
-            $table->foreign('order_id')->references('id')->on('orders');
+            $table->foreign('order_id')
+                ->references('id')
+                ->on('orders')
+                ->onDelete('cascade');
             $table->unsignedBigInteger('menu_id');
-            $table->foreign('menu_id')->references('id')->on('menus');
+            $table->foreign('menu_id')
+                ->references('id')
+                ->on('menus');
             $table->integer('quantity');
             $table->text('notes')->nullable();
             $table->timestamps();
