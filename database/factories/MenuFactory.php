@@ -21,8 +21,13 @@ class MenuFactory extends Factory
      */
     public function definition()
     {
+        $faker = \Faker\Factory::create();
+        $faker->addProvider(new \FakerRestaurant\Provider\id_ID\Restaurant($faker));
         return [
-            //
+            'restaurant_id' => 1,
+            'name' => $faker->foodName(),
+            'menu_category_id' => 1,
+            'price' => rand(10000, 30000),
         ];
     }
 }

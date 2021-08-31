@@ -22,7 +22,8 @@ class MenuCategoryFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'restaurant_id' => 1,
+            'name' => "makanan",
         ];
     }
 }

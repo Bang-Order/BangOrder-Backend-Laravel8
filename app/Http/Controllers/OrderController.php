@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Xendit\Xendit;
 
 class OrderController extends Controller
 {
@@ -35,7 +37,24 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Xendit::setApiKey(env('XENDIT_KEY'));
+
+        $params = [
+            'reference_id' => "txid-".Str::uuid(),
+            'currency' => 'IDR',
+            'amount' => $request->amount,
+            'checkout_method' => 'ONE_TIME_PAYMENT',
+            'channel_code' => $request->channel_code,
+            'channel_properties' => [
+                'success_redirect_url' => 'https://dashboard.xendit.co/register/1',
+            ],
+            'metadata' => [
+                'branch_code' => 'tree_branch'
+            ]
+        ];
+
+        $createEWalletCharge = \Xendit\EWallets::createEWalletCharge($params);
+        return($createEWalletCharge);
     }
 
     /**

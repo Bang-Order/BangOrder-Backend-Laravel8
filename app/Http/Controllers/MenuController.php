@@ -82,4 +82,9 @@ class MenuController extends Controller
     {
         //
     }
+
+    public function getMenu(Request $request)
+    {
+        return Menu::where('menu_category_id', $request->category)->get();
+    }
 }
